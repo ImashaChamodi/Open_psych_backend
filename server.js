@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
 const socketIo = require('socket.io');
-const { MongoServerClosedError } = require("mongodb");
 const app = express();
 
 const server = app.listen(3000, () => {
@@ -30,20 +29,10 @@ const doctorSchema = new mongoose.Schema({
     specializedarea: String,
     id: String
 })
-const itemSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    }
-});
+
 
 const User = mongoose.model('User', userSchema);
 const Doctor = mongoose.model('Doctor', doctorSchema)
-const Item = mongoose.model('Item', itemSchema);
 
 mongoose.set("strictQuery", false);
 mongoose.connect('mongodb+srv://thirduser:ZS2YxkJVaRonvZQF@cluster0.defir6e.mongodb.net/?retryWrites=true&w=majority', {
